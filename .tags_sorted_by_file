@@ -1,0 +1,94 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+print_info	communicate.cpp	/^void print_info(const model &Sphere,int MCs, double stepsize){$/;"	f
+save_info	communicate.cpp	/^void save_info(std::ofstream &file,const model &Sphere,int MCs, double stepsize){$/;"	f
+__COMMUNICATE_H	communicate.h	/^#define __COMMUNICATE_H$/;"	d
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+Interact	interactions.cpp	/^double Interact(particle &a, particle &b,double dr, std::string Interaction_Type){$/;"	f
+Lennard_Jones	interactions.cpp	/^double Lennard_Jones(double rij2, double epsilon, double sigma, double cutoff){$/;"	f
+Repulsive_Lennard_Jones	interactions.cpp	/^double Repulsive_Lennard_Jones(double rij2, double epsilon, double sigma, double cutoff){$/;"	f
+cut	interactions.cpp	/^#define cut /;"	d	file:
+eps	interactions.cpp	/^#define eps /;"	d	file:
+sig	interactions.cpp	/^#define sig /;"	d	file:
+__INTERACTIONS_H	interactions.h	/^#define __INTERACTIONS_H$/;"	d
+main	main.cpp	/^int main(int argc, char const *argv[])$/;"	f
+add_random_particles	model.cpp	/^void model::add_random_particles(int N, int Type){$/;"	f	class:model
+build_Verlet_lists	model.cpp	/^void model::build_Verlet_lists(double Verlet_radius){$/;"	f	class:model
+control_step	model.cpp	/^void model::control_step( double &step_value,double elapsed_time){$/;"	f	class:model
+get_total_energy	model.cpp	/^double model::get_total_energy(){$/;"	f	class:model
+initialise_Verlet	model.cpp	/^void model::initialise_Verlet(){$/;"	f	class:model
+local_energy	model.cpp	/^double model::local_energy(particle &P){$/;"	f	class:model
+model	model.cpp	/^model::model(double Radius_value){$/;"	f	class:model
+perform_a_Metropolis_move	model.cpp	/^void model::perform_a_Metropolis_move(double Max_angular_perturbation, double Temperature){$/;"	f	class:model
+perform_a_Metropolis_move	model.cpp	/^void model::perform_a_Metropolis_move(double Max_angular_perturbation,double Verlet_radius, double Temperature){$/;"	f	class:model
+write_polar_configuration	model.cpp	/^void model::write_polar_configuration(std::ofstream &Fout, int Iteration){$/;"	f	class:model
+Acceptance	model.h	/^    double Acceptance;$/;"	m	class:model
+Energy	model.h	/^    double Energy;$/;"	m	class:model
+Interaction	model.h	/^    std::string Interaction;$/;"	m	class:model
+__model_H	model.h	/^#define __model_H$/;"	d
+model	model.h	/^class model$/;"	c
+particles	model.h	/^    std::vector <particle> particles;$/;"	m	class:model
+polar_coords_for_Verlet	model.h	/^    std::vector<double> polar_coords_for_Verlet; \/\/3N$/;"	m	class:model
+radius	model.h	/^    double radius;$/;"	m	class:model
+L	old_stuff/MC_code_verlet 2.cpp	/^double L,T,Radius;$/;"	v
+N	old_stuff/MC_code_verlet 2.cpp	/^int N;$/;"	v
+RANDOM	old_stuff/MC_code_verlet 2.cpp	/^double RANDOM (double a, double b)$/;"	f
+RAND_INT	old_stuff/MC_code_verlet 2.cpp	/^double RAND_INT (int a)$/;"	f
+Radius	old_stuff/MC_code_verlet 2.cpp	/^double L,T,Radius;$/;"	v
+T	old_stuff/MC_code_verlet 2.cpp	/^double L,T,Radius;$/;"	v
+VerletList	old_stuff/MC_code_verlet 2.cpp	/^void VerletList(vector<double>X, vector<double>Y, vector<double>Z, double rv, vector<double>&xv, vector<double>&yv, vector<double>&zv, vector<double>&vlist, vector<double>&nlist) \/\/number of neighbours list)$/;"	f
+boundary	old_stuff/MC_code_verlet 2.cpp	/^void boundary (vector<double> &X, vector<double> &Y, vector<double> &Z, double xnew, double ynew, double znew, int selected )$/;"	f
+distance	old_stuff/MC_code_verlet 2.cpp	/^double distance(double theta_i, double theta_j,double  psi_i,double  psi_j,double  phi_i,double phi_j)$/;"	f
+distance_sq	old_stuff/MC_code_verlet 2.cpp	/^double distance_sq(double x1, double y1, double z1, double x2,double y2, double z2){$/;"	f
+dzugutov_potential	old_stuff/MC_code_verlet 2.cpp	/^double dzugutov_potential (vector<double> X, vector<double>Y, vector<double> Z,  int i, int j ) $/;"	f
+energy_next	old_stuff/MC_code_verlet 2.cpp	/^double energy_next(vector<double> X, vector<double>Y, vector <double> Z, int selected, vector<double>nlist, vector<double>vlist)$/;"	f
+energy_old	old_stuff/MC_code_verlet 2.cpp	/^ double energy_old(vector<double> X, vector<double>Y, vector <double> Z, int selected,vector<double>nlist,vector<double>vlist)$/;"	f
+eucliddistance2	old_stuff/MC_code_verlet 2.cpp	/^double eucliddistance2(double *px, double *py, double *pz, double *pw, int i, int j)$/;"	f
+exists	old_stuff/MC_code_verlet 2.cpp	/^inline bool exists (const std::string& name) {$/;"	f
+main	old_stuff/MC_code_verlet 2.cpp	/^int main (int argn, char *argv[])$/;"	f
+move	old_stuff/MC_code_verlet 2.cpp	/^void move(vector<double> &X, vector <double>&Y, vector <double> &Z, double dx, double dy, double dz, int selected) $/;"	f
+save	old_stuff/MC_code_verlet 2.cpp	/^void save(string filename, string extension,vector<double> X, vector <double>Y, vector <double> Z, int padding,int iter)$/;"	f
+sigma	old_stuff/MC_code_verlet 2.cpp	/^#define sigma /;"	d	file:
+tocartesian	old_stuff/MC_code_verlet 2.cpp	/^void tocartesian(double *theta, double *psi, double *phi, int p, double *px, double *py, double *pz, double *pw, double radius)$/;"	f
+L	old_stuff/MC_code_verlet.cpp	/^double L,T,Radius;$/;"	v
+N	old_stuff/MC_code_verlet.cpp	/^int N;$/;"	v
+RANDOM	old_stuff/MC_code_verlet.cpp	/^double RANDOM (double a, double b)$/;"	f
+RAND_INT	old_stuff/MC_code_verlet.cpp	/^double RAND_INT (int a)$/;"	f
+Radius	old_stuff/MC_code_verlet.cpp	/^double L,T,Radius;$/;"	v
+T	old_stuff/MC_code_verlet.cpp	/^double L,T,Radius;$/;"	v
+VerletList	old_stuff/MC_code_verlet.cpp	/^void VerletList(vector<double>X, vector<double>Y, vector<double>Z, double rv, vector<double>&xv, vector<double>&yv, vector<double>&zv, vector<double>&vlist, vector<double>&nlist) \/\/number of neighbours list)$/;"	f
+boundary	old_stuff/MC_code_verlet.cpp	/^void boundary (vector<double> &X, vector<double> &Y, vector<double> &Z, double xnew, double ynew, double znew, int selected )$/;"	f
+distance	old_stuff/MC_code_verlet.cpp	/^double distance(double theta_i, double theta_j,double  psi_i,double  psi_j,double  phi_i,double phi_j)$/;"	f
+distance_sq	old_stuff/MC_code_verlet.cpp	/^double distance_sq(double x1, double y1, double z1, double x2,double y2, double z2){$/;"	f
+energy_next	old_stuff/MC_code_verlet.cpp	/^double energy_next(vector<double> X, vector<double>Y, vector <double> Z, int selected, vector<double>nlist, vector<double>vlist)$/;"	f
+energy_old	old_stuff/MC_code_verlet.cpp	/^ double energy_old(vector<double> X, vector<double>Y, vector <double> Z, int selected,vector<double>nlist,vector<double>vlist)$/;"	f
+eucliddistance2	old_stuff/MC_code_verlet.cpp	/^double eucliddistance2(double *px, double *py, double *pz, double *pw, int i, int j)$/;"	f
+exists	old_stuff/MC_code_verlet.cpp	/^inline bool exists (const std::string& name) {$/;"	f
+interaction	old_stuff/MC_code_verlet.cpp	/^double interaction (double distance_sq) $/;"	f
+main	old_stuff/MC_code_verlet.cpp	/^int main (int argn, char *argv[])$/;"	f
+move	old_stuff/MC_code_verlet.cpp	/^void move(vector<double> &X, vector <double>&Y, vector <double> &Z, double dx, double dy, double dz, int selected) $/;"	f
+save	old_stuff/MC_code_verlet.cpp	/^void save(string filename, string extension,vector<double> X, vector <double>Y, vector <double> Z, int padding,int iter)$/;"	f
+sigma	old_stuff/MC_code_verlet.cpp	/^#define sigma /;"	d	file:
+tocartesian	old_stuff/MC_code_verlet.cpp	/^void tocartesian(double *theta, double *psi, double *phi, int p, double *px, double *py, double *pz, double *pw, double radius)$/;"	f
+particle	particle.cpp	/^particle::particle(int Type){$/;"	f	class:particle
+reassign_cartesian	particle.cpp	/^void particle::reassign_cartesian(double radius){$/;"	f	class:particle
+set_cartesian	particle.cpp	/^void particle::set_cartesian(double* Values){$/;"	f	class:particle
+set_polar	particle.cpp	/^void particle::set_polar(double* Values){$/;"	f	class:particle
+MAXNEIGHBOURS	particle.h	/^#define MAXNEIGHBOURS /;"	d
+__PARTICLE_H	particle.h	/^#define __PARTICLE_H$/;"	d
+cartesian	particle.h	/^    double cartesian[4];$/;"	m	class:particle
+neighbours	particle.h	/^    int neighbours[MAXNEIGHBOURS];$/;"	m	class:particle
+num_of_neighs	particle.h	/^    int num_of_neighs;$/;"	m	class:particle
+particle	particle.h	/^class particle$/;"	c
+polar	particle.h	/^    double polar[3];$/;"	m	class:particle
+type	particle.h	/^    int type;$/;"	m	class:particle
+distance	utilities.cpp	/^double distance(particle &a, particle &b, double R){$/;"	f
+engine	utilities.cpp	/^std::mt19937 engine;$/;"	v
+euclidean_distance2	utilities.cpp	/^double euclidean_distance2(particle &a, particle &b){$/;"	f
+mod2	utilities.cpp	/^double mod2(double x, double y, double z, double w){return (x*x)+(y*y)+(z*z)+(w*w);}$/;"	f
+rnd_int	utilities.cpp	/^double rnd_int(double a, double b){$/;"	f
+rnd_real	utilities.cpp	/^double rnd_real(double a, double b){$/;"	f
+__UTILITIES_H	utilities.h	/^#define __UTILITIES_H$/;"	d
