@@ -1,0 +1,3 @@
+Straley
+Temperature 8
+Sweeps 100000

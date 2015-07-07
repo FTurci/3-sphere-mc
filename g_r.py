@@ -1,8 +1,6 @@
-import time
-from scipy import stats, integrate
 import argparse
+
 from spheretools import *
-import os
 
 parser=argparse.ArgumentParser(description="3-sphere g(r)")
 parser.add_argument("folder", type=str, help="Input Folder")
@@ -15,6 +13,12 @@ parser.add_argument("--save",  dest='save',action='store_true', help="save resul
 parser.add_argument("--plot",  dest='plot',action='store_true', help="plot result")
 parser.set_defaults(nbins=50, R=0.5*(1.+pl.sqrt(5)), plot=False,save=False)
 args=parser.parse_args()
+
+
+import time
+from scipy import stats, integrate
+
+import os
 
 R= args.R
 folder=args.folder
