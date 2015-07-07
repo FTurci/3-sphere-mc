@@ -5,6 +5,7 @@ model::model(double Radius_value, int N){
         this->radius=Radius_value;
         this->Npart=N;
         this->particles=new particle [N];
+        this->Acceptance=0;
 };
 
 void model::add_random_particles(int N, int Type){
@@ -51,19 +52,19 @@ void model::load_configuration(std::ifstream &fin, int N, int Type){
 void model::set_interaction(std::string InteractionType){
     if(InteractionType=="LJ") {
         this->Interaction=1;
-         std::cout<<"(model::set_interaction) Interaction set to LJ"<<std::endl;
+         std::cout<<"* Interaction set to LJ"<<std::endl;
     }
     else if(InteractionType=="Repulsive LJ") 
         {
             this->Interaction=2;
-        std::cout<<"(model::set_interaction) Interaction set to Repulsive LJ"<<std::endl;
+        std::cout<<"* Interaction set to Repulsive LJ"<<std::endl;
     }
     else if(InteractionType=="Wahnstrom"){
         this->Interaction=3;
-        std::cout<<"(model::set_interaction) Interaction set to Wahnstrom"<<std::endl;
+        std::cout<<"* Interaction set to Wahnstrom"<<std::endl;
     }
     else{
-        std::cerr<<"(model::set_interaction) \n===> UNDEFINED INTERACTION\nInteraction \""<<InteractionType<<"\" not defined. The only available options are\n - LJ\n - Repulsive LJ\n\n Check for a typo.\n====";
+        std::cerr<<"* \n===> UNDEFINED INTERACTION\nInteraction \""<<InteractionType<<"\" not defined. The only available options are\n - LJ\n - Repulsive LJ\n\n Check for a typo.\n====";
         exit(-1);
     }
 
@@ -71,11 +72,14 @@ void model::set_interaction(std::string InteractionType){
 
 void model::write_polar_configuration(std::ofstream &Fout, int Iteration){
     // write Header
-    Fout<<"#ITERATION"<<std::endl<<Iteration<<std::endl;
-    Fout<<"#type theta\tpsi\tphi\n";
+    Fout<<Npart<<"\nITERATION\t"<<Iteration<<std::endl;
+
     for (int i = 0; i < this->Npart; ++i)
-    {
-        Fout<<this->particles[i].type<<'\t';
+    {   
+        if(this->particles[i].type==1)
+        Fout<<'A'<<'\t';
+        else if (this->particles[i].type==2)
+        Fout<<'B'<<'\t';
         for (int k = 0; k < 3; ++k)
             Fout<<this->particles[i].polar[k]<<'\t';
         Fout<<std::endl;
@@ -123,9 +127,6 @@ void model::build_Verlet_lists(double Verlet_radius){
     
 }
 
-
-
-
 double model::local_energy(particle &P){
     double dE=0,U;
     // std::cout<<"The selected particle has "<<P.num_of_neighs<<" neighbours "<<std::endl;
@@ -152,8 +153,7 @@ double model::get_total_energy(){
         {
     
             dr2=distance2(particles[i], particles[j],this->radius);            
-            E+=Interact(particles[i], particles[j],dr2, this->Interaction);
-            
+            E+=Interact(particles[i], particles[j],dr2, this->Interaction);   
         }
   
     }
@@ -170,8 +170,8 @@ double model::get_energy(int i){
     for (int j = 0; j < this->Npart; ++j)
         {
             if(i!=j){
-            dr2=distance2(particles[i], particles[j],this->radius);            
-            E+=Interact(particles[i], particles[j],dr2, this->Interaction);
+                dr2=distance2(particles[i], particles[j],this->radius);            
+                E+=Interact(particles[i], particles[j],dr2, this->Interaction);
             }
         }
     return E;
@@ -196,19 +196,22 @@ void model::perform_a_Metropolis_move(double Max_angular_perturbation, double Te
     // evaluate the new energy
     Enew=get_energy(selected);
     dE=Enew-Eold;
-    
+
     if(rnd_real(0,1)>exp(-dE/Temperature)){
         
         for (int k = 0; k < 3; ++k)
-        {
             particles[selected].polar[k]=old_polar[k];
-        }
-            particles[selected].reassign_cartesian(this->radius);
-            this->Acceptance--;
-        }
+        // std::cout<<"rejected"<<std::endl;
+        particles[selected].reassign_cartesian(this->radius);
+    }
 
-    else 
+    else {
+        // if accepted
+        // std::cout<<dE<<std::endl;
+        this->Energy+=dE;
         this->Acceptance++;
+    }
+    
 }
 
 

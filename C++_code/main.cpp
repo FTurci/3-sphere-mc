@@ -3,14 +3,18 @@
 #include "particle.h"
 #include "model.h"
 #include "communicate.h"
+#include "composestream.h"
+#include <ctime>
 
 using namespace std;
 
+
 int main(int argc, char const *argv[])
-{
+{   
+    clock_t tStart = clock();
    
     ifstream fin(argv[1],ifstream::in);
-    string word,mode,Interaction,filename="none";
+    string word,mode,Interaction,filename="none",Folder="./";
     double radius=-1, Temperature=-1,step=-1;
     int N=-1;
     long int Number_of_sweeps=-1;
@@ -32,30 +36,37 @@ int main(int argc, char const *argv[])
         else if (word=="Step") fin>>step; //step size in length units
         else if (word=="Load") fin>>filename;
         else if (word=="Snapshots") fin>>Snapshots;
+        else if (word=="Folder") fin>>Folder;
 
     }
     fin.close();
+    system(("mkdir "+Folder).c_str());
+
     if(radius<0 || Temperature<0 || Number_of_sweeps<0 ||N<0 ||step<0 ) {cout<<"Radius/N/Temperature/Sweeps/Step are not set. Check your input file."<<endl; exit(0);}
     double Angular_step=step/radius;
     
    
     model Sphere(radius,N);
 
-    cout<<"* The radius is "<<Sphere.radius<<endl;
-    cout<<"* The number of particles is "<<Sphere.Npart<<endl;
-    cout<<"* The temperature is "<<Temperature<<endl;
-    cout<<"* The density is "<<N/(2*M_PI*M_PI*radius*radius*radius)<<endl;
-    cout<<"* The linear displacement is "<<step<<endl;
-    cout<<"* The angular displacement is "<<step/radius<<endl;
-    cout<<"* The number of sweeps is "<<Number_of_sweeps<<endl;
-    cout<<"* The interval between snapshots is "<<Snapshots<<endl;
+    ComposeStream   out;
+    ofstream file(Folder+"/log.txt", ofstream::out);
+    out.linkStream(std::cout);
+    out.linkStream(file);
+    out<<"* The radius is "<<Sphere.radius<<endl;
+    out<<"* The number of particles is "<<Sphere.Npart<<endl;
+    out<<"* The temperature is "<<Temperature<<endl;
+    out<<"* The density is "<<N/(2*M_PI*M_PI*radius*radius*radius)<<endl;
+    out<<"* The linear displacement is "<<step<<endl;
+    out<<"* The angular displacement is "<<step/radius<<endl;
+    out<<"* The number of sweeps is "<<Number_of_sweeps<<endl;
+    out<<"* The interval between snapshots is "<<Snapshots<<endl;
 
     Sphere.set_interaction(Interaction);
 
-    cout<<"* The particles interact via "<<Sphere.Interaction<<endl;
+    // cout<<"* The particles interact via "<<Sphere.Interaction<<endl;
   
     if(filename!="none"){
-    cout<<"* Loading file "<<filename<<endl;
+    out<<"* Loading file "<<filename<<endl;
     ifstream start(filename, ifstream::in);
     Sphere.load_configuration( start,  N, 1);
     start.close();
@@ -69,14 +80,14 @@ int main(int argc, char const *argv[])
     // {
     //     Sphere.particles[i].type=2;    
     // }
-    ofstream Trajectory("output.tj", ofstream::out);
-    ofstream logfile("log.txt", ofstream::out);
+    ofstream Trajectory(Folder+"/output.tj", ofstream::out);
 
     Sphere.write_polar_configuration(Trajectory,0);
     
     double E=Sphere.get_total_energy();
+    Sphere.Energy=E;
 
-    cout<<"\n===> The total energy per particle is "<<E/N<<"\n\n";
+    out<<"\n===> The initial energy per particle is "<<E/N<<"\n\n";
 
     for (int i = 0; i < Number_of_sweeps; ++i)
     {
@@ -85,16 +96,20 @@ int main(int argc, char const *argv[])
         Sphere.perform_a_Metropolis_move(Angular_step,  Temperature);
           
        }
+
          
        if(i%Snapshots==0) {
+        
         Sphere.get_total_energy();
         print_info(Sphere,i,step);
-        save_info(logfile,Sphere,i,step);
+        save_info(file,Sphere,i,step);
         Sphere.write_polar_configuration(Trajectory,i);
         }
        
     }
 
-    logfile.close();
+    out<<"\n===> The final energy per particle is "<<Sphere.get_total_energy()/N<<"\n\n";
+    out<<"\n===> The total execution time is "<< ((double)(clock() - tStart)/CLOCKS_PER_SEC)/60<<" minutes."<<endl;
+    file.close();
     return 0;
 }

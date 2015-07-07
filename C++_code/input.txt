@@ -2,5 +2,7 @@ N 120
 Interaction LJ
 Radius 1.8358603769995316
 Temperature	0.85
-Sweeps 500000
+Sweeps 10000
 Step 0.02
+Snapshots 500
+Folder LJ-T0.85-R1.83586-N120

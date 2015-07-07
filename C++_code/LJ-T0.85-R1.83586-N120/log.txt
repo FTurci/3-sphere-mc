@@ -1,3 +1,14 @@
+* The radius is 1.83586
+* The number of particles is 120
+* The temperature is 0.85
+* The density is 0.9825
+* The linear displacement is 0.02
+* The angular displacement is 0.0108941
+* The number of sweeps is 10000
+* The interval between snapshots is 500
+
+===> The total energy per particle is 3.86911e+18
+
 #Iteration	Stepsize	Acceptance	Energy
 0	0.02	0.483333	7.79287e+15
 500	0.02	0.652495	-2.863
@@ -19,3 +30,8 @@
 8500	0.02	0.841969	-4.82333
 9000	0.02	0.842529	-4.90816
 9500	0.02	0.843233	-4.73238
+
+===> The final energy per particle is -4.96602
+
+
+===> The total execution time is 0.0590961 minutes.
