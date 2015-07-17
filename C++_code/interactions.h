@@ -3,7 +3,7 @@
 
 #define EPSILON 1.
 #define SIGMA 1.
-#define CUT  -0.016316891136000006 //energy at cutoff 2.5
+#define CUT  -0.016316891136000006 //energy at cutoff 2.5 eppsilon1 sigma 1
 
 
 #define EPSILON_AA 1.

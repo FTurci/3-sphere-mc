@@ -3,7 +3,7 @@
 
 particle::particle(){
 
-};
+}
 
 void particle::set_cartesian(double* Values){
     for (int i = 0; i < 3; ++i)

@@ -14,7 +14,9 @@ int main(int argc, char const *argv[])
     clock_t tStart = clock();
    
     ifstream fin(argv[1],ifstream::in);
-    string word,mode,Interaction,filename="none",Folder="./";
+
+    string word,mode,Interaction,filename="none",Folder="./", inputname;
+    inputname=argv[1];
     double radius=-1, Temperature=-1,step=-1;
     int N=-1;
     long int Number_of_sweeps=-1;
@@ -25,7 +27,7 @@ int main(int argc, char const *argv[])
         else if(word=="Straley"){
             radius=0.5*(1.+sqrt(5));
             N=120;
-            Interaction="Repulsive LJ";
+            Interaction="Repulsive_LJ";
             step= M_PI/180.*2;//;//radius;//M_PI/180.*0.5;
         }
         else if (word=="Temperature") fin>>Temperature;
@@ -41,6 +43,7 @@ int main(int argc, char const *argv[])
     }
     fin.close();
     system(("mkdir "+Folder).c_str());
+    system(("cp "+inputname+" "+Folder).c_str());
 
     if(radius<0 || Temperature<0 || Number_of_sweeps<0 ||N<0 ||step<0 ) {cout<<"Radius/N/Temperature/Sweeps/Step are not set. Check your input file."<<endl; exit(0);}
     double Angular_step=step/radius;
@@ -61,28 +64,26 @@ int main(int argc, char const *argv[])
     out<<"* The number of sweeps is "<<Number_of_sweeps<<endl;
     out<<"* The interval between snapshots is "<<Snapshots<<endl;
 
-    Sphere.set_interaction(Interaction);
-
-    // cout<<"* The particles interact via "<<Sphere.Interaction<<endl;
   
     if(filename!="none"){
     out<<"* Loading file "<<filename<<endl;
     ifstream start(filename, ifstream::in);
-    Sphere.load_configuration( start,  N, 1);
+    Sphere.load_cartesian_configuration( start,  N, 1);
     start.close();
     }
     else{
           // add N random particles of type 1
      Sphere.add_random_particles(N,1);
     }
+
+    Sphere.set_interaction(Interaction);
+
     // modify type for half of the particles
     // for (int i = N/2; i < N; ++i)
     // {
     //     Sphere.particles[i].type=2;    
     // }
     ofstream Trajectory(Folder+"/output.tj", ofstream::out);
-
-    Sphere.write_polar_configuration(Trajectory,0);
     
     double E=Sphere.get_total_energy();
     Sphere.Energy=E;
@@ -93,17 +94,18 @@ int main(int argc, char const *argv[])
     {
        for (int j = 0; j < N; ++j)
        {
-        Sphere.perform_a_Metropolis_move(Angular_step,  Temperature);
+        Sphere.perform_a_Metropolis_move(step,  Temperature);
           
        }
 
          
-       if(i%Snapshots==0) {
+       if(i%Snapshots==0) 
+       {
         
         Sphere.get_total_energy();
         print_info(Sphere,i,step);
         save_info(file,Sphere,i,step);
-        Sphere.write_polar_configuration(Trajectory,i);
+        Sphere.write_cartesian_configuration(Trajectory,i);
         }
        
     }

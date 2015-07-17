@@ -38,7 +38,8 @@ public:
 
     //output
     void write_polar_configuration(std::ofstream &Fout, int Iteration);
-    void load_configuration(std::ifstream &fin, int N, int Type);
+    void write_cartesian_configuration(std::ofstream &Fout, int Iteration);
+    void load_cartesian_configuration(std::ifstream &fin, int N, int Type);
     
     void build_Verlet_lists(double Verlet_radius);
   

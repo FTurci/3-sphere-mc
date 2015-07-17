@@ -15,7 +15,12 @@ double rnd_int(double a, double b){
     return Uniform(engine);
 }
 
+
+template<typename T> T SQ(T x) { return x * x; }
+
 double mod2(double x, double y, double z, double w){return (x*x)+(y*y)+(z*z)+(w*w);}
+
+double norm(double vec[]){return sqrt(SQ(vec[0])+SQ(vec[1])+SQ(vec[2])+SQ(vec[3]) );}
 
 double euclidean_distance2(particle &a, particle &b){
     double dx,dy,dz,dw;
