@@ -39,12 +39,12 @@ info="""## 3-Sphere MC simulation
 
 with open(folder+"/Readme.md",'w') as fw:
     fw.write(info)
-print info
+print (info)
 
-print "Starting the simulation..."
+print ("Starting the simulation...")
 # setup particle positions
 
-if(inputfile is not 'none'):
+if(inputfile != 'none'):
     polar=pl.load(inputfile)
 else:
     # random start
@@ -55,8 +55,8 @@ cartesian=convert(polar, R)
 fout=open(folder+"/Arclog.txt",'w')
 
 
-print "Iteration\tEnergy"
-for x in xrange(1,duration):
+print ("Iteration\tEnergy")
+for x in range(1,duration):
     # attemp move for all the N particles
     OldEnergy=energy(cartesian,R)
     oldpolar=pl.copy(polar)
@@ -75,7 +75,7 @@ for x in xrange(1,duration):
     fout.write( "%i %g\n"%(x, Energy/N))
     # save results:
     if x%snaps==0:
-        print "%d\t%g"%(x,Energy/N)
+        print ("%d\t%g"%(x,Energy/N))
         pl.save(folder+"/snap%04d"%x, polar)
 fout.close()
     
